@@ -1,5 +1,2 @@
-require "daily_meal/version"
-
-module DailyMeal
-  # Your code goes here...
-end
+require_relative "./daily_meal/version"
+require_relative './daily_meal/cli'

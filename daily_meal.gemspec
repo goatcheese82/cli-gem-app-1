@@ -6,12 +6,12 @@ require "daily_meal/version"
 Gem::Specification.new do |spec|
   spec.name          = "daily_meal"
   spec.version       = DailyMeal::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["<nonsquishy@gmail.com>"]
+  spec.authors       = ["goatcheese82"]
+  spec.email         = ["nonsquishy@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Gives a list of recipes.}
+  spec.description   = %q{This Gem allows users to find a random recipe from SeriousEats.com.}
+  spec.homepage      = "https://github.com/goatcheese82/cli-gem-app-1"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
