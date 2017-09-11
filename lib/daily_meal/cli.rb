@@ -20,6 +20,25 @@ class DailyMeal::CLI
         puts "What would you like to eat?"
         input = gets.strip.downcase
         
+
+        case input
+        when "1"
+            #accesses #menu_chicken
+        when "2"
+            ##menu_burgers
+        when "3"
+            ##menu_pasta
+        when "4"
+            puts "Salad"
+        when "5"
+            puts "Dessert"
+        when "list"
+            call
+        else
+            puts "Please select a number or 'Exit'"
+        end
+
+        
     end
 
 end

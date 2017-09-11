@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/daily_meal'
+require "nokogiri"
+require "open-uri"
+
+require "bundler/setup"
+require "daily_meal"
 
 DailyMeal::CLI.new.call
