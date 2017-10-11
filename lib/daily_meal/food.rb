@@ -3,7 +3,8 @@ class DailyMeal::Food
     attr_accessor :name, :ingredients, :directions
 
     def self.chicken
-        puts "hey, here's chicken!"
+        self.food_menu
+
     end
 
     def self.burgers
@@ -28,6 +29,34 @@ class DailyMeal::Food
         recipe = self.new
         recipe.name = doc.search("module_image"[0]).text.strip
     end
+
+    def self.food_menu
+        puts <<-food_options
+            What would you like?
+            
+            1. Ingredients
+            2. Directions
+            3. Different Recipe
+            4. Return
+            food_options
+
+        food_input = gets.strip.downcase
+
+        if food_input == "1"
+            puts "ingredients"
+        elsif food_input == "2"
+            puts "directions"
+        elsif food_input == "3"
+            DailyMeal::CLI.call
+        elsif food_input == "4"
+            DailyMeal::CLI.call
+        else puts "Please make a numerical selection"
+        end
+
+    end
+        
+
+
 
     def link_scraper
         urls = []
