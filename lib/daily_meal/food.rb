@@ -4,6 +4,7 @@ class DailyMeal::Food
 
     def self.chicken
         self.food_menu
+        puts @recipe_link
 
     end
 
@@ -43,7 +44,7 @@ class DailyMeal::Food
         food_input = gets.strip.downcase
 
         if food_input == "1"
-            puts "ingredients"
+            self.link_scraper
         elsif food_input == "2"
             puts "directions"
         elsif food_input == "3"
@@ -58,7 +59,7 @@ class DailyMeal::Food
 
 
 
-    def link_scraper
+    def self.link_scraper
         urls = []
     
         recipe_url = Nokogiri::HTML(open("http://www.seriouseats.com/tags/recipes/chicken"))
@@ -67,8 +68,7 @@ class DailyMeal::Food
         links = recipe_url.css('.module__link')
         links.each{|link| recipe_links << link['href']}
     
-        puts recipe_links[1, 3, 5, 7]
-    
+        @recipe_link = recipe_links[rand(recipe_links.length)]
     end
 
 end
