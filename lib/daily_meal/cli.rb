@@ -23,15 +23,15 @@ class DailyMeal::CLI
 
         case input
         when "1"
-            #accesses #menu_chicken
+            @recipe = DailyMeal::Food.chicken
         when "2"
-            ##menu_burgers
+            @recipe = DailyMeal::Food.burgers
         when "3"
-            ##menu_pasta
+            @recipe = DailyMeal::Food.pasta
         when "4"
-            puts "Salad"
+            @recipe = DailyMeal::Food.salad
         when "5"
-            puts "Dessert"
+            @recipe = DailyMeal::Food.dessert
         when "list"
             call
         else
