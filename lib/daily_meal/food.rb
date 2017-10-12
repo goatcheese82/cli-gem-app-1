@@ -1,35 +1,38 @@
 class DailyMeal::Food
 
-    attr_accessor :name, :ingredients, :directions
+    attr_accessor :name, :ingredients, :directions, :doc, :food_cat
 
     def self.chicken
+        @food_cat = "http://www.seriouseats.com/tags/recipes/chicken"
         self.food_menu
         puts @recipe_link
 
     end
 
     def self.burgers
-        self.scrape_burgers
+        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        self.food_menu
+        puts @recipe_link
     end
 
     def self.pasta
-        self.scrape_pasta
+        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        self.food_menu
+        puts @recipe_link
     end
 
     def self.salad
-        self.scrape_salad
+        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        self.food_menu
+        puts @recipe_link
     end
 
     def self.dessert
-        self.scrape_dessert
+        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        self.food_menu
+        puts @recipe_link
     end
 
-    def self.scrape_chicken
-        doc = Nokogiri::HTML(open("http://www.seriouseats.com/tags/recipes/chicken"))
-
-        recipe = self.new
-        recipe.name = doc.search("module_image"[0]).text.strip
-    end
 
     def self.food_menu
         puts <<-food_options
@@ -45,8 +48,10 @@ class DailyMeal::Food
 
         if food_input == "1"
             self.link_scraper
+            self.ingredient_getter
         elsif food_input == "2"
-            puts "directions"
+            self.link_scraper
+            self.direction_getter
         elsif food_input == "3"
             DailyMeal::CLI.call
         elsif food_input == "4"
@@ -60,19 +65,36 @@ class DailyMeal::Food
 
 
     def self.link_scraper
-        urls = []
     
-        recipe_url = Nokogiri::HTML(open("http://www.seriouseats.com/tags/recipes/chicken"))
+        recipe_url = Nokogiri::HTML(open("#{@food_cat}"))
     
         recipe_links = []
         links = recipe_url.css('.module__link')
         links.each{|link| recipe_links << link['href']}
     
-        @recipe_link = recipe_links[rand(recipe_links.length)]
+        @recipe_link = recipe_links.sample
     end
 
-end
+    def self.ingredient_getter
+        recipe_spec = Nokogiri::HTML(open("#{@recipe_link}"))
 
+        @ingredients = []
+        ingredient_list = recipe_spec.css('.recipe-ingredients')
+        ingredient_list.each{|spec| @ingredients << spec.text}
+        puts @ingredients
+    end
+    
+    def self.direction_getter
+        recipe_direction = Nokogiri::HTML(open("#{@recipe_link}"))
+
+        @directions = []
+        direction_list = recipe_direction.css('.recipe-procedures-list.instructions')
+        direction_list.each{|step| @directions << step.text}
+        puts @directions
+    end
+
+
+end
 
         
         
