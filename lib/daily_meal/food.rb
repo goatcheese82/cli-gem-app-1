@@ -2,8 +2,8 @@ class DailyMeal::Food
 
     attr_accessor :name, :ingredients, :directions, :doc, :food_cat
 
-    def self.chicken
-        @food_cat = "http://www.seriouseats.com/tags/recipes/chicken"
+    def self.food_pick(selection)
+        @food_cat = "http://www.seriouseats.com/tags/recipes/#{selection}"
         self.food_menu
         puts @recipe_link
 
@@ -16,19 +16,19 @@ class DailyMeal::Food
     end
 
     def self.pasta
-        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        @food_cat = "http://www.seriouseats.com/tags/recipes/pasta"
         self.food_menu
         puts @recipe_link
     end
 
     def self.salad
-        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        @food_cat = "http://www.seriouseats.com/tags/recipes/salad"
         self.food_menu
         puts @recipe_link
     end
 
     def self.dessert
-        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
+        @food_cat = "http://www.seriouseats.com/tags/recipes/dessert"
         self.food_menu
         puts @recipe_link
     end
