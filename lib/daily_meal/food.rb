@@ -1,38 +1,15 @@
 class DailyMeal::Food
 
-    attr_accessor :name, :ingredients, :directions, :doc, :food_cat
+    attr_accessor :name, :ingredients, :directions, :food_cat
 
     def self.food_pick(selection)
         @food_cat = "http://www.seriouseats.com/tags/recipes/#{selection}"
-        self.food_menu
+        self.link_scraper
+        self.ingredient_getter
+        self.direction_getter
         puts @recipe_link
-
+        self.food_menu     
     end
-
-    def self.burgers
-        @food_cat = "http://www.seriouseats.com/tags/recipes/burger"
-        self.food_menu
-        puts @recipe_link
-    end
-
-    def self.pasta
-        @food_cat = "http://www.seriouseats.com/tags/recipes/pasta"
-        self.food_menu
-        puts @recipe_link
-    end
-
-    def self.salad
-        @food_cat = "http://www.seriouseats.com/tags/recipes/salad"
-        self.food_menu
-        puts @recipe_link
-    end
-
-    def self.dessert
-        @food_cat = "http://www.seriouseats.com/tags/recipes/dessert"
-        self.food_menu
-        puts @recipe_link
-    end
-
 
     def self.food_menu
         puts <<-food_options
@@ -44,21 +21,25 @@ class DailyMeal::Food
             4. Return
             food_options
 
-        food_input = gets.strip.downcase
+        food_input = nil
 
-        if food_input == "1"
-            self.link_scraper
-            self.ingredient_getter
-        elsif food_input == "2"
-            self.link_scraper
-            self.direction_getter
-        elsif food_input == "3"
-            DailyMeal::CLI.call
-        elsif food_input == "4"
-            DailyMeal::CLI.call
-        else puts "Please make a numerical selection"
-        end
 
+            puts "Please make a numerical selection"
+
+            food_input = gets.strip.downcase
+
+                if food_input == "1"
+                    puts @ingredients
+                elsif food_input == "2"
+                    puts @directions
+                elsif food_input == "3"
+                    self.food_pick
+                elsif food_input == "4"
+                    DailyMeal::CLI.new
+                else puts "Please make a numerical selection"
+                
+            end
+            self.food_menu
     end
         
 
@@ -75,13 +56,16 @@ class DailyMeal::Food
         @recipe_link = recipe_links.sample
     end
 
+
+    ###Do Not Touch###
+
     def self.ingredient_getter
         recipe_spec = Nokogiri::HTML(open("#{@recipe_link}"))
 
         @ingredients = []
         ingredient_list = recipe_spec.css('.recipe-ingredients')
-        ingredient_list.each{|spec| @ingredients << spec.text}
-        puts @ingredients
+        ingredient_list.each{|spec| @ingredients << spec.text.strip}
+        
     end
     
     def self.direction_getter
@@ -89,8 +73,7 @@ class DailyMeal::Food
 
         @directions = []
         direction_list = recipe_direction.css('.recipe-procedures-list.instructions')
-        direction_list.each{|step| @directions << step.text}
-        puts @directions
+        direction_list.each{|step| @directions << step.text.strip}
     end
 
 
