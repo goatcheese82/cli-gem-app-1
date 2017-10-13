@@ -25,15 +25,16 @@ class DailyMeal::CLI
 
             case input
             when "1"
-                DailyMeal::Food.food_pick('chicken')
+                @recipes = DailyMeal::Food.food_pick('chicken')
+
             when "2"
-                @recipe = DailyMeal::Food.food_pick('burger')
+                @recipes = DailyMeal::Food.food_pick('burger')
             when "3"
-                @recipe = DailyMeal::Food.food_pick('pasta')
+                @recipes = DailyMeal::Food.food_pick('pasta')
             when "4"
-                @recipe = DailyMeal::Food.food_pick('salad')
+                @recipes = DailyMeal::Food.food_pick('salad')
             when "5"
-                @recipe = DailyMeal::Food.food_pick('dessert')
+                @recipes = DailyMeal::Food.food_pick('dessert')
             when "list"
                 call
             else
@@ -42,7 +43,7 @@ class DailyMeal::CLI
         
     end
 
-    def self.selection_menu
+    def selection_menu
         puts <<-food_options
             What would you like?
             
