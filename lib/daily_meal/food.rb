@@ -7,11 +7,10 @@ class DailyMeal::Food
         self.link_scraper
         self.ingredient_getter
         self.direction_getter
-        puts @recipe_link
-        self.food_menu     
+        puts @recipe_link     
     end
 
-    def self.food_menu
+    def self.selection_menu
         puts <<-food_options
             What would you like?
             

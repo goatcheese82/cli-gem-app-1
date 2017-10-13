@@ -42,6 +42,37 @@ class DailyMeal::CLI
         
     end
 
+    def self.selection_menu
+        puts <<-food_options
+            What would you like?
+            
+            1. Ingredients
+            2. Directions
+            3. Different Recipe
+            4. Return
+            food_options
+
+        food_input = nil
+
+
+            puts "Please make a numerical selection"
+
+            food_input = gets.strip.downcase
+
+                if food_input == "1"
+                    puts @ingredients
+                elsif food_input == "2"
+                    puts @directions
+                elsif food_input == "3"
+                    self.food_pick
+                elsif food_input == "4"
+                    DailyMeal::CLI.new
+                else puts "Please make a numerical selection"
+                
+            end
+            self.food_menu
+    end
+
     def goodbye
         puts "Thank you! Enjoy your meal!"
     end
