@@ -26,7 +26,7 @@ class DailyMeal::Food
 
         @@ingredients = []
         ingredient_list = recipe_spec.css('.recipe-ingredients')
-        ingredient_list.each{|spec| @ingredients << spec.text.strip}
+        ingredient_list.each{|spec| @@ingredients << recipe_spec.text.strip}
         
     end
     
